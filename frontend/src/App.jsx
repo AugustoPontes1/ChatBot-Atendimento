@@ -158,12 +158,12 @@ function App() {
             </div>
           ) : (
             <div className="login-buttons">
-              <p>Select user type:</p>
+              <p>Selecione o tipo de usuário:</p>
               <button onClick={() => handleLogin('A')} className="login-btn">
-                Login as User A
+                Login Usuário A
               </button>
               <button onClick={() => handleLogin('B')} className="login-btn">
-                Login as User B
+                Login Usuário B
               </button>
             </div>
           )}
