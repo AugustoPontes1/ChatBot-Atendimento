@@ -18,7 +18,9 @@ services:
     python manage.py migrate &&
     python manage.py runserver 0.0.0.0:8000
     "
-   build: .
+   build:
+      context: .
+      dockerfile: Dockerfile.backend
    container_name: django-docker
    ports:
      - "${DJANGO_PORT}:8000" # Host:Container
@@ -35,5 +37,22 @@ services:
      - ./backend:/app
    env_file:
      - .env
+
+ react-frontend:
+   build:
+     context: .
+     dockerfile: Dockerfile.frontend
+   container_name: react-docker
+   ports:
+     - "${REACT_PORT}:5173"
+   volumes:
+     - ./frontend:/appfront
+     - /appfront/node_modules
+   environment:
+     - VITE_API_BASE_URL=http://localhost:8001/api
+   command: npm run dev -- --host 0.0.0.0
+   depends_on:
+     - django-web
+
 volumes:
    postgres_data:
