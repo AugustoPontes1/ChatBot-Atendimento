@@ -1,5 +1,3 @@
-
-
 class Verifier:
     """ 
     This class verifies the data type coming from the requests

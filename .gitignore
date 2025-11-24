@@ -1,7 +1,28 @@
 # BACK-END
-venv
-__pycache
+# Python
+*.pyc
+__pycache__/
+*~
+*.log
+*.pot
+# Virtual Environment
 .env
+.venv
+env/
+venv/
+ENV/
+# Django-specific
+db.sqlite3
+local_settings.py
+media/
+static/
+# IDE-specific
+.vscode/
+.idea/
+# OS-specific
+.DS_Store
+Thumbs.db
+
 
 # FRONT-END
 # Logs
@@ -12,12 +33,10 @@ yarn-debug.log*
 yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
-
 node_modules
 dist
 dist-ssr
 *.local
-
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

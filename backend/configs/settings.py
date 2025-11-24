@@ -26,7 +26,7 @@ SECRET_KEY = os.getenv('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -38,9 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    
+
+    # CORS
+    'corsheaders',
+
     # Apps
-    'message'
+    'message',
 ]
 
 MIDDLEWARE = [
@@ -130,4 +133,23 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-CORS_ALLOWED_ORIGINS=["http://localhost:5173"]
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173",
+]
+
+# ADD THESE LINES:
+CORS_ALLOW_CREDENTIALS = True
+
+# Optional: For development, you can allow all origins (remove in production)
+CORS_ALLOW_ALL_ORIGINS = True
+
+# Make sure sessions work properly with CORS
+SESSION_COOKIE_SAMESITE = 'None'
+SESSION_COOKIE_SECURE = True  # Set to False if not using HTTPS in development
+CSRF_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SECURE = True  # Set to False if not using HTTPS in development
+
+# Update ALLOWED_HOSTS
+ALLOWED_HOSTS = ['localhost', '127.0.0.1', '0.0.0.0']
