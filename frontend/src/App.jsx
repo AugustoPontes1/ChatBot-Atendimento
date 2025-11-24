@@ -13,17 +13,15 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
 
-  // Check if user is logged in on component mount
   useEffect(() => {
     checkSession();
   }, []);
 
-  // Fetch messages whenever activeUser changes
   useEffect(() => {
     if (activeUser) {
       fetchMessages();
     } else {
-      setMessages([]); // Clear messages when logging out
+      setMessages([]);
     }
   }, [activeUser]);
 
@@ -66,7 +64,6 @@ function App() {
         setActiveUser(response.data.active_user);
         localStorage.setItem('activeUser', response.data.active_user);
         setError('');
-        // Messages will be automatically fetched by the useEffect
       }
     } catch (err) {
       setError(err.response?.data?.Erro || 'Login failed');
@@ -103,9 +100,6 @@ function App() {
         response.data.bot_message
       ]);
 
-      // Alternative: Refresh all messages to ensure consistency
-      // await fetchMessages();
-
       setNewMessage('');
     } catch (err) {
       setError(err.response?.data?.Erro || 'Failed to send message');
@@ -123,18 +117,16 @@ function App() {
     return new Date(dateString).toLocaleString();
   };
 
-  // Helper function to determine message type for styling
   const getMessageType = (message) => {
     if (message.user_sender === activeUser) {
       return 'user-message';
     } else if (message.user_sender.startsWith('Usuário: ')) {
       return 'bot-message';
     } else {
-      return 'other-user-message'; // This shouldn't happen with our filtering
+      return 'other-user-message';
     }
   };
 
-  // Helper function to display sender name nicely
   const getDisplayName = (message) => {
     if (message.user_sender === activeUser) {
       return 'You';
