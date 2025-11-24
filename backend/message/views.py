@@ -5,6 +5,7 @@ from rest_framework import status
 
 from .models import Message, USER_TYPE_CHOICES
 from .serializers import MessageSerializer
+from .utils import Verifier
 
 
 VALID_USERS = {user[0] for user in USER_TYPE_CHOICES}
@@ -18,7 +19,7 @@ class MessageViewSet(ViewSet):
         user = request.data.get('user') or request.query_params.get('user')
         if user not in VALID_USERS:
             return Response(
-                {"detail": "user must be 'A' or 'B'."},
+                {"Erro": "Usuário deve ser do tipo 'A' ou 'B'"},
                 status=status.HTTP_400_BAD_REQUEST
             )
 
@@ -35,37 +36,27 @@ class MessageViewSet(ViewSet):
 
     @action(detail=False, methods=['post'])
     def send_message(self, request):
-        # preferir request.data (JSON body). depois headers, query e session.
-        user = None
-        if isinstance(request.data, dict):
-            user = request.data.get('user')
-            text = request.data.get('text')
-        else:
-            text = None
-
-        # fallbacks
-        if not user:
-            user = request.headers.get('X-User') or request.query_params.get('user') or request.session.get('active_user')
-        if not text:
-            text = request.query_params.get('text') or (request.data.get('text') if isinstance(request.data, dict) else None)
-
+        # request.data (JSON body), headers, query and session.
+        user = Verifier.verify_user(request, 'user')
+        text = Verifier.verify_user_text(request, 'text')
+        
         if user not in VALID_USERS:
-            return Response({"Erro": "Usuário inválido"}, status=status.HTTP_400_BAD_REQUEST)
-
+            return Response({
+                "Erro": "Usuário inválido"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
         if not text or not str(text).strip():
-            return Response({"Erro": "O texto é obrigatório"}, status=status.HTTP_400_BAD_REQUEST)
+            return Response({
+                "Erro": "O texto é obrigatório"}, 
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        # salva a mensagem do usuário
-        user_msg = Message.objects.create(sender=user, text=text.strip())
-
-        # cria resposta do bot com sender previsível (BOT_A, BOT_B, ...)
-        bot_sender = f"BOT_{user}"
-        # rótulo legível (ex: "Usuário A")
+        user_msg = Message.objects.create(user_sender=user, 
+                                          user_text=text.strip())
+        bot_sender = f"Usuário: {user}"
         nome_exibicao = dict(USER_TYPE_CHOICES).get(user, user)
         bot_text = f"Obrigado por seu contato, {nome_exibicao}. Em breve responderemos."
-
-        # dependendo do model, salvar bot_msg pode falhar se choices não permitirem BOT_*
-        bot_msg = Message.objects.create(sender=bot_sender, text=bot_text)
+        bot_msg = Message.objects.create(user_sender=bot_sender, bot_text=bot_text)
 
         return Response({
             "user_message": MessageSerializer(user_msg).data,
