@@ -179,11 +179,11 @@ function App() {
 
         {!activeUser ? (
           <div className="welcome-message">
-            <h2>Welcome to the Message App</h2>
-            <p>Please log in to start sending messages.</p>
+            <h2>Bem Vindo ao Message App</h2>
+            <p>Por favor, logue em um dos usuários disponíveis para poder enviar mensagens</p>
             <div className="user-description">
-              <p><strong>User A</strong> and <strong>User B</strong> have separate message histories.</p>
-              <p>Each user can only see their own messages.</p>
+              <p><strong>Usuario A</strong> e <strong>Usuário B</strong> tem históricos separados</p>
+              <p>Cada usuário pode ver a mensagem que ele mesmo enviou, não podendo ver a do outro usuário</p>
             </div>
           </div>
         ) : (
