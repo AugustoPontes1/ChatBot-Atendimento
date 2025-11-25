@@ -113,6 +113,7 @@ Design responsivo: CSS flexbox para adaptação a diferentes tamanhos de tela
 
 - Formulário controlado: Estado do input de mensagem gerenciado pelo React
 
+
 ## Devops
 - Arquitetura Multi-container
 Serviços separados: Backend, frontend e banco de dados em containers distintos
@@ -127,6 +128,8 @@ Hot-reloading: Volumes montados permitem desenvolvimento com atualização em te
 - Variáveis de ambiente: Configuração flexível para diferentes ambientes
 
 - Banco de dados persistente: Volume Docker para preservar dados entre reinicializações
+
+- Github Actions para testar automaticamente a aplicação
 
 ## Testes
 - Testes unitários abrangentes: Cobertura de login, logout, envio de mensagens e isolamento de dados
