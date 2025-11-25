@@ -7,10 +7,11 @@
 # Tecnologias Utilizadas
 
 - Python(Django, Django Rest)
-- Javascript(React, Vite)
+- Javascript(React, Vite, JEST)
 - PostgreSQL
 - Docker, Docker-Compose
 - Makefile
+- CI/CD(Github Actions)
 
 # Como testar o projeto localmente
 
@@ -59,6 +60,8 @@ frontend/
 │   ├── App.jsx            # Componente principal
 │   ├── App.css            # Estilos principais
 │   └── main.jsx           # Ponto de entrada
+|   └── App.test.jsx       # Testes unitários para analisar os métodos em App.jsx
+|   └── Integration.test.jsx # Testes de integração
 ├── package.json
 └── vite.config.js
 ```
