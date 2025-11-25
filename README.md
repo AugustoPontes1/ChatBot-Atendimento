@@ -25,7 +25,7 @@ pode clonar o repositório na sua máquina
 
 ## Passo 2
 - Digite o seguinte comando para copiar as variáveis de ambiente para o arquivo **.env** com o seguinte comando: ```cp .env.example .env```, após isso,no arquivo **.env**, descomente as variáveis de ambientes relacionadas ao banco de dados e do django, a variável **SECRET_KEY**, vai estar vazia, para gerar uma chave e preencher essa variável, acesse essa pasta: cd ./backend
-e digite o seguinte comando: ```python generate_hash_key.py``` ou ```python3 generate_hash_key.py```, após isso você verá no terminal uma chave gerada, copie ela e coloque a variável **SECRET_KEY**
+e digite o seguinte comando: ```python generate_hash_key.py``` ou ```python3 generate_hash_key.py```, após isso você verá no terminal uma chave gerada, copie ela e coloque na variável **SECRET_KEY**
 
 ## Passo 3
 - Agora que você descomentou preencheu as variáveis de ambiente, vamos gerar o ambiente containerizado(se você está na pasta **./backend**, digite no terminal ```cd ..```), digite o seguinte comando: ```make build``` ou ```sudo make build```,
