@@ -66,6 +66,17 @@ frontend/
 └── vite.config.js
 ```
 
+# Estruturação do Projeto(DevOps)
+```
+.github/
+├── workflows/
+    └── fullapp-tests.yml # Testa no github actions da aplicação do back e front
+
+Dockerfile.backend.yml # Cria o container com as depêndencias do backend
+Dockerfile.frontend.yml # Cria o container com as depêndencias do frontend
+docker-compose.yml # Cria as configurações e roda comandos para os containers da aplicação e banco de dados
+```
+
 # Decisões
 
 ## Back-End
