@@ -1,5 +1,6 @@
 # CHATBOT DE ATENDIMENTO SIMULADO
 
+<img width="600" height="600" alt="Logo 4blue Atendimento ChatBot" src="https://github.com/user-attachments/assets/ee4f73cb-bfba-4ffa-bde0-b1b8e3166c49" />
 
 ## Este projeto consiste em mostrar uma simulação de um atendimento com chatbot a medida que o usuário envia mensagens para receber o atendimento
 
